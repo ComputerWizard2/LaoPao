@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.MovieTableDao">
+
+	<select id="select" parameterType="MovieTable" resultType="MovieTable" flushCache="true" useCache="false">
+		select * from movietable
+		<where>
+			<if test="mid !=null">
+			  and  mid = #{mid}
+			</if>
+		
+		</where>
+	</select>
+	<delete id="delete">
+		delete from movietable where mid = #{mid}
+	</delete>
+	<insert id ="insert" parameterType="MovieTable">
+		insert into movietable (moviename, time, score, imagepath,saveimagepath,director,performer) values(#{moviename},#{time},#{score},#{imagepath},#{saveimagepath},#{director},#{performer})
+	</insert>
+	<update id="update" parameterType="MovieTable" >
+		update movietable 
+		<set>
+			score = #{score},
+		</set>
+		where mid =#{mid}
+	</update>
+</mapper>

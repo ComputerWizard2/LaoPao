@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+<!--开发者模式  -->
+<constant name="struts.devMode" value="true"></constant>
+
+	<package name="stu" extends="struts-default">
+	<interceptors>
+		<interceptor name="myInterceptor" class="com.interceptor.MyInterceptor"/>
+	
+	</interceptors>
+		<action name="*do" class="com.action.MyAction" method="{1}">
+			<result name="success">/WEB-INF/success.jsp</result>
+			<result name="error">/WEB-INF/error.jsp</result>
+			<result name="register">/WEB-INF/register.jsp</result>
+			<result name="input">/WEB-INF/register.jsp</result>
+			<result name="chaxun" type="chain">chaxundo</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="myInterceptor"/>
+		<allowed-methods>login,register,registe,chaxun</allowed-methods>
+		</action>
+		
+		<action name="*Movie" class="com.action.MovieAction" method="{1}">
+			<result name="deleteit" type="chain">logindo</result>
+			<result name="update" >/WEB-INF/update.jsp</result>
+			<result name="error">/WEB-INF/error.jsp</result>
+			<result name="insert">/WEB-INF/update.jsp</result>
+			<result name="chaxun" type="chain">chaxundo</result>
+			<result name="movie">/WEB-INF/movie.jsp</result>
+			<result name="self" type="chain">selfpageMovie</result>
+			<allowed-methods>delete,update,chaxun,insert,doinsert,selfpage,updateDesc</allowed-methods>
+		</action>
+		
+
+	</package>
+</struts>
